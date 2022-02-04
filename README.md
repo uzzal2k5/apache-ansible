@@ -12,3 +12,8 @@ fully automated script that will :
    Any improvisation in the process is a plus point.
 
 Require a shell script as well as a ansible/terraform job for the same
+
+Commands
+---
+
+ansible-playbook -i inventory.yml  apache.yml --extra-vars "node_group=webapplication" --extra-vars "APACHE_USER=www-data" --ask-become-pass

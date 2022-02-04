@@ -4,8 +4,8 @@
   become: yes
   vars_files:
     - role-management/apache/vars/apache-vars.yml
-    - role-management/ipaddress/vars/apache-vars.yml
-    - role-management/test/vars/apache-vars.yml
+    - role-management/ipaddress/vars/ipaddress-vars.yml
+    - role-management/test/vars/test-vars.yml
     - sudoer_file
   roles:
     - role-management/apache
