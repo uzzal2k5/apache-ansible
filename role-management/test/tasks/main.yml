@@ -1,0 +1,6 @@
+- name: Set fact for config to test
+  set_fact:
+    apache_conf_to_test:  "{{ APACHE_CONFIG }}"
+
+- name: Test VirtualHost Configuration
+  shell: /usr/sbin/apache2ctl configtest

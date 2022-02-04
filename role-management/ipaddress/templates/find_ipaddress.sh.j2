@@ -1,0 +1,2 @@
+IPADDRESS=$(ifconfig {{INET4_NIC}} | grep inet | awk '{ print $2 }' | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+echo ${IPADDRESS}

@@ -1,0 +1,59 @@
+- name: Target Machine (Ubunt 20.04) Update [ apt update]
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+- name: Install Apache into Target Machine ( apt install apache2 )
+  apt:
+    name: apache2
+    update_cache: yes
+    state: latest
+- name: Ansible copy certs directory to the remote server
+  copy:
+    src: certs
+    dest: "{{APACHE_HOME}}/conf.d"
+    owner: "{{ APACHE_USER }}"
+    group: "{{ APACHE_USER }}"
+    mode: '0775'
+- name: Ansible copy SSL conf to the remote server
+  template:
+    src: ssl.conf.j2
+    dest: "{{APACHE_HOME}}/conf.d/ssl.conf"
+    owner: "{{ APACHE_USER }}"
+    group: "{{ APACHE_USER }}"
+    mode: '0664'
+
+- name: Copy Application Content to Root Directory
+  copy:
+    src: web
+    dest: "{{CONTENT_ROOT}}/"
+    owner: "{{ APACHE_USER }}"
+    group: "{{ APACHE_USER }}"
+    mode: '0775'
+
+- name: Set up Apache VirtualHost
+  template:
+    src: apache.conf.j2
+    dest: "{{APACHE_HOME}}/sites-available/{{ DOMAIN_NAME }}.conf"
+    owner: "{{ APACHE_USER }}"
+    group: "{{ APACHE_USER }}"
+    mode: 0664
+- name: Enable New VirtualHost
+  shell: /usr/sbin/a2ensite {{ DOMAIN_NAME }}.conf
+  notify: Reload Apache
+
+- name: Enable mod_ssl
+  shell: /usr/sbin/a2enmod ssl
+
+- name: Enable Rewrite
+  shell: /usr/sbin/a2enmod rewrite
+
+- name: Disable Default Apache Site
+  shell: /usr/sbin/a2dissite 000-default.conf
+  when: disable_default
+  notify: Reload Apache
+
+- include: ufw.yml
+
+
+
+

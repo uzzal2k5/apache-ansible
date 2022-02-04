@@ -1,0 +1,20 @@
+<VirtualHost *:{{ HTTP_HOST }}>
+    ServerAdmin webmaster@localhost
+    ServerName {{ HTTP_HOST }}
+    ServerAlias www.{{ HTTP_HOST }}
+    RewriteEngine on
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+
+<VirtualHost *:{{ HTTPS_PORT }}>
+    ServerAdmin webmaster@localhost
+    ServerName {{ HTTP_HOST }}
+    ServerAlias www.{{ HTTP_HOST }}
+    DocumentRoot {{ CONTENT_ROOT }}
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    SSLEngine on
+    include {{APACHE_HOME}}/conf.d/ssl.conf;
+</VirtualHost>
