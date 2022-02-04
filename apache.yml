@@ -8,4 +8,4 @@
     - role-management/test/vars/apache-vars.yml
     - sudoer_file
   roles:
-    - role-devops-ansible/nginx
+    - role-management/apache
