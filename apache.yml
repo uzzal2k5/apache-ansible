@@ -1,4 +1,4 @@
-- name: Install & Configure Nginx Proxy
+- name: Install & Configure Apache2 Webserver
   hosts: "{{node_group}}"
   remote_user: "{{APACHE_USER}}"
   become: yes
