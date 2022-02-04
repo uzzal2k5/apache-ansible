@@ -33,7 +33,7 @@
 - name: Set up Apache VirtualHost
   template:
     src: apache.conf.j2
-    dest: "{{APACHE_HOME}}/sites-available/{{ DOMAIN_NAME }}.conf"
+    dest: "{{ APACHE_HOME }}/sites-available/{{ DOMAIN_NAME }}.conf"
     owner: "{{ APACHE_USER }}"
     group: "{{ APACHE_USER }}"
     mode: 0664
