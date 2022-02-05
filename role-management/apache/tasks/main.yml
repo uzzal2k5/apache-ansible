@@ -8,6 +8,7 @@
     name: apache2
     update_cache: yes
     state: latest
+
 - name: Creates {{ CERTIFICATE_ROOT }} directory
   file:
     path: "{{CERTIFICATE_ROOT}}"
