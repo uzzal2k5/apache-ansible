@@ -39,9 +39,6 @@
     owner: "{{ APACHE_USER }}"
     group: "{{ APACHE_USER }}"
     mode: 0664
-- name: Enable New VirtualHost
-  shell: /usr/sbin/a2ensite {{ DOMAIN_NAME }}.conf
-  notify: Reload Apache
 
 - name: Enable mod_ssl
   shell: /usr/sbin/a2enmod ssl
@@ -52,6 +49,10 @@
 - name: Disable Default Apache Site
   shell: /usr/sbin/a2dissite 000-default.conf
   when: disable_default
+  notify: Reload Apache
+
+- name: Enable New VirtualHost
+  shell: /usr/sbin/a2ensite {{ SUBDOMAIN}}.{{ DOMAIN_NAME }}.conf
   notify: Reload Apache
 
 - include: ufw.yml
