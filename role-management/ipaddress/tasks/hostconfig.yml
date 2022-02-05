@@ -6,4 +6,4 @@
   lineinfile: dest=/etc/hosts regexp="^127.0.1.1" line="#127.0.1.1" state=present
 
 - name: "Add dns entries to hosts file ${IPADDRESS}"
-  lineinfile: dest=/etc/hosts regexp="^127.0.0.1" line="${IPADDRESS} {{SUBDOMAIN}}" state=present
+  lineinfile: dest=/etc/hosts regexp="^127.0.0.1" line="`${IPADDRESS}` {{SUBDOMAIN}}" state=present

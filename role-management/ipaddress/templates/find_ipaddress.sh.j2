@@ -1,2 +1,12 @@
 IPADDRESS=$(ifconfig {{INET4_NIC}} | grep inet | awk '{ print $2 }' | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
-echo ${IPADDRESS}
+HOST_NAME={{SUBDOMAIN}}.{{DOMAIN_NAME}}
+MATCH_HOST="$(grep -n $HOST_NAME /etc/hosts | cut -f1 -d:)"
+HOST_ENTRY="${IPADDRESS}  ${HOST_NAME}"
+if [ ! -z "$MATCH_HOST" ]
+then
+    while read -r line_number; do
+            sudo sed -i '' "${line_number}s/.*/${HOST_ENTRY} /" /etc/hosts
+    done <<< "$MATCH_HOST"
+else
+    echo "$HOST_ENTRY" | sudo tee -a /etc/hosts > /dev/null
+fi
