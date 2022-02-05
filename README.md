@@ -16,4 +16,4 @@ Require a shell script as well as a ansible/terraform job for the same
 Commands
 ---
 
-ansible-playbook -i inventory.yml  apache.yml --extra-vars "node_group=webapplication" --extra-vars "REMOTE_USER=webuser" --ask-become-pass
+ansible-playbook -i inventory.yml  apache.yml --extra-vars "node_group=webapplication"  --ask-become-pass
