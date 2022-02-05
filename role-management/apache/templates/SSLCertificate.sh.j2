@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -ex
 [[ ! -z "{{SUBDOMAIN}}" ]] && DOMAIN={{SUBDOMAIN}}.{{DOMAIN_NAME}} || DOMAIN={{DOMAIN_NAME}}
-opensslgen rsa -aes256 -passout pass:gsahdg -out ${DOMAIN}.pass.key 4096
+openssl genrsa -aes256 -passout pass:gsahdg -out ${DOMAIN}.pass.key 4096
 openssl rsa -passin pass:gsahdg -in ${DOMAIN}.pass.key -out ${DOMAIN}.key
 rm ${DOMAIN}.pass.key
 openssl req -nodes -newkey rsa:4096 -keyout ${DOMAIN}.key -out ${DOMAIN}.csr -subj "/C=BD/ST=BD/L=BD/O=Kube Cluster /OU=DevOps/CN=${DOMAIN}"
