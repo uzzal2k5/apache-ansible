@@ -1,3 +1,13 @@
+- name: Target Machine (Ubunt 20.04) Update [ apt update]
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+- name: Install OpenSSL  ( apt install openssl )
+  apt:
+    name: openssl
+    update_cache: yes
+    state: latest
+
 - name: Copy SSLCertificate.sh to {{ CERTIFICATE_ROOT }}
   template:
     src: SSLCertificate.sh.j2
