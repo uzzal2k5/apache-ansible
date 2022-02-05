@@ -1,7 +1,7 @@
 PACKAGE:
   - apache2
 APACHE_VERSION: "latest"
-SUBDOMAIN: 'web'
+SUBDOMAIN: "web"
 HTTP_HOST: "{{DOMAIN_NAME}}"
 HTTP_PORT: "80"
 HTTPS_PORT: "443"
