@@ -1,6 +1,6 @@
 - name: Install & Configure Apache2 Webserver
   hosts: "{{node_group}}"
-  remote_user: "{{APACHE_USER}}"
+  remote_user: "{{REMOTE_USER}}"
   become: yes
   vars_files:
     - role-management/apache/vars/apache-vars.yml

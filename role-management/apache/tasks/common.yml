@@ -1,0 +1,7 @@
+- name: Creates {{ COMMON_DIR }} directory
+  file:
+    path: "{{ COMMON_DIR }}"
+    state: directory
+    owner: "{{ REMOTE_USER }}"
+    group: "{{ REMOTE_USER }}"
+    mode: '0775'

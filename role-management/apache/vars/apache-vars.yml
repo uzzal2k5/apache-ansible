@@ -5,7 +5,7 @@ SUBDOMAIN: 'web'
 HTTP_HOST: "{{DOMAIN_NAME}}"
 HTTP_PORT: "80"
 HTTPS_PORT: "443"
-CONTENT_ROOT: "/var/www/{{ CONTENT_ROOT }}"
-CERTIFICATE_ROOT: "/etc/ssl/certs"
+CONTENT_ROOT: "/var/www/{{ DOMAIN_NAME }}"
+CERTIFICATE_ROOT: "{{ APACHE_HOME }}/conf.d/certs"
 disable_default: true
 

@@ -1,3 +1,4 @@
+- include: common.yml
 - name: Target Machine (Ubunt 20.04) Update [ apt update]
   apt:
     update_cache: yes
@@ -7,13 +8,7 @@
     name: apache2
     update_cache: yes
     state: latest
-- name: Ansible copy certs directory to the remote server
-  copy:
-    src: certs
-    dest: "{{APACHE_HOME}}/conf.d"
-    owner: "{{ APACHE_USER }}"
-    group: "{{ APACHE_USER }}"
-    mode: '0775'
+
 - name: Ansible copy SSL conf to the remote server
   template:
     src: ssl.conf.j2
@@ -21,10 +16,10 @@
     owner: "{{ APACHE_USER }}"
     group: "{{ APACHE_USER }}"
     mode: '0664'
-
+- include: self_signed_ssl.yml
 - name: Copy Application Content to Root Directory
   copy:
-    src: web
+    src: webapp
     dest: "{{CONTENT_ROOT}}/"
     owner: "{{ APACHE_USER }}"
     group: "{{ APACHE_USER }}"

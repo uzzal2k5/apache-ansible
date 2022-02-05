@@ -1,0 +1,22 @@
+- name: Copy SSLCertificate.sh to {{ CERTIFICATE_ROOT }}
+  template:
+    src: SSLCertificate.sh.j2
+    dest: "{{COMMON_DIR}}/SSLCertificate.sh"
+    owner: "{{ REMOTE_USER }}"
+    group: "{{ REMOTE_USER }}"
+    mode: '0775'
+
+- name: Pass the script to change the permission
+  blockinfile:
+    dest: "{{COMMON_DIR}}/trigger_SSLCertificate.sh"
+    block: |
+      #!/bin/bash
+      echo $1 | ./SSLCertificate.sh
+    create: yes
+    mode: u=rwx,g=rx,o=rx
+
+- name: Executing the permission change script
+  shell: sh trigger_SSLCertificate.sh '{{ SUBDOMAIN }}'  > {{COMMON_DIR}}/trigger_SSLCertificate.log 2>&1
+  args:
+    chdir: "{{COMMON_DIR}}"
+
