@@ -6,17 +6,8 @@
     group: "{{ REMOTE_USER }}"
     mode: '0775'
 
-- name: Pass the script to change the permission
-  blockinfile:
-    dest: "{{COMMON_DIR}}/trigger_SSLCertificate.sh"
-    block: |
-      #!/bin/bash
-      echo $1 | ./SSLCertificate.sh
-    create: yes
-    mode: u=rwx,g=rx,o=rx
-
 - name: Executing the permission change script
-  shell: sh trigger_SSLCertificate.sh '{{ SUBDOMAIN }}'  > {{COMMON_DIR}}/trigger_SSLCertificate.log 2>&1
+  shell: sh SSLCertificate.sh > {{COMMON_DIR}}/SSLCertificate.log 2>&1
   args:
     chdir: "{{COMMON_DIR}}"
 
