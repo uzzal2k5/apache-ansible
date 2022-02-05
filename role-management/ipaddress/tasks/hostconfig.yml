@@ -1,6 +1,6 @@
 
 - name: "Add hostname entries to hosts file (localhost)"
-  lineinfile: dest=/etc/hosts regexp="^127.0.0.1" line="127.0.0.1 localhost" state=present
+  lineinfile: dest=/etc/hosts regexp="^127.0.0.1" line="127.0.0.1 {{SUBDOMAIN}} localhost" state=present
 
 - name: "Comment in  hosts file (127.0.1.1.)"
   lineinfile: dest=/etc/hosts regexp="^127.0.1.1" line="#127.0.1.1" state=present
