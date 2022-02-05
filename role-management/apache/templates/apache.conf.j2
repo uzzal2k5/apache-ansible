@@ -1,4 +1,4 @@
-<VirtualHost *:{{ HTTP_PORT }}>
+<VirtualHost {{ HTTP_HOST }}:{{ HTTP_PORT }}>
     ServerAdmin webmaster@localhost
     ServerName {{ HTTP_HOST }}
     ServerAlias www.{{ HTTP_HOST }}
@@ -7,7 +7,7 @@
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 </VirtualHost>
 
-<VirtualHost *:{{ HTTPS_PORT }}>
+<VirtualHost {{ HTTP_HOST }}:{{ HTTPS_PORT }}>
     ServerAdmin webmaster@localhost
     ServerName {{ HTTP_HOST }}
     ServerAlias www.{{ HTTP_HOST }}
