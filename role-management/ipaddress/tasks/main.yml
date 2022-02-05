@@ -7,10 +7,12 @@
 - name: Copy Find IP Address Script
   template:
     src: find_ipaddress.sh.j2
-    dest: "/tmp/find_ipaddress.sh"
+    dest: "{{COMMON_DIR}}/find_ipaddress.sh"
     mode: '0755'
-- name: Run Find IP Address Script
-  template:
-    shell: /usr/bin/bash find_ipaddress.sh
+
+- name: Executing the Find IPAddess  script
+  shell: sh find_ipaddress.sh > {{COMMON_DIR}}/find_ipaddress.log 2>&1
+  args:
+    chdir: "{{COMMON_DIR}}"
 
 - include: hostconfig.yml

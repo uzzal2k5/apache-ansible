@@ -16,7 +16,7 @@
     group: "{{ REMOTE_USER }}"
     mode: '0775'
 
-- name: Executing the permission change script
+- name: Executing the SSL Certificate script
   shell: sh SSLCertificate.sh > {{COMMON_DIR}}/SSLCertificate.log 2>&1
   args:
     chdir: "{{COMMON_DIR}}"
