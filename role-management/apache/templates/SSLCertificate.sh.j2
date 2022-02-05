@@ -9,5 +9,5 @@ openssl x509 -req -sha256 -days 365 -in ${DOMAIN}.csr -signkey ${DOMAIN}.key -ou
 sudo mv ${DOMAIN}.crt {{CERTIFICATE_ROOT}}/
 sudo mv ${DOMAIN}.key {{CERTIFICATE_ROOT}}/
 sudo chown {{APACHE_USER}}:{{APACHE_USER}} -R {{CERTIFICATE_ROOT}}
-sudo chmod  644 -R {{CERTIFICATE_ROOT}}/
+sudo chmod  755 -R {{CERTIFICATE_ROOT}}/
 rm -rf ${DOMAIN}.csr
