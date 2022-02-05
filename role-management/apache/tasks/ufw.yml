@@ -1,23 +1,34 @@
-- name: "Allow everything and enable UFW"
+- name: "Install ufw"
+  apt:
+    name: ufw
+    state: present
+
+- name: "Configure ufw defaults"
+  ufw: direction={{ item.direction }} policy={{ item.policy }}
+  with_items:
+    - { direction: 'incoming', policy: 'deny' }
+    - { direction: 'outgoing', policy: 'allow' }
+  notify:
+    - Restart UFW
+
+- name: "Configure ufw rules"
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  with_items:
+    - { rule: 'limit', port: '{{ SSH_PORT | default("22") }}', proto: 'tcp' }
+    - { rule: 'allow', port: '{{HTTP_PORT}}', proto: 'tcp' }
+    - { rule: 'allow', port: '{{HTTPS_PORT}}', proto: 'tcp' }
+  notify:
+    - Restart UFW
+
+- name: "Enable ufw logging"
+  ufw: logging=on
+  notify:
+    - Restart UFW
+
+- name: "Enable ufw"
   ufw:
     state: enabled
-    policy: allow
 
-- name: Set logging
-  ufw:
-    logging: on
-
-- name: "UFW - Allow HTTP on port {{ HTTP_PORT }}"
-  ufw:
-    rule: allow
-    port: "{{ HTTP_PORT }}"
-    proto: tcp
-
-- name: "UFW - Allow HTTPS on port {{ HTTP_PORT }}"
-  ufw:
-    rule: allow
-    port: "{{ HTTPS_PORT }}"
-    proto: tcp
 
 
 

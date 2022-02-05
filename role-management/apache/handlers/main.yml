@@ -2,7 +2,18 @@
   service:
     name: apache2
     state: reloaded
+
 - name: Restart Apache
   service:
     name: apache2
+    state: restarted
+
+- name: Restart SSH
+  service:
+    name: ssh
+    state: restarted
+
+- name: Restart UFW
+  service:
+    name: ufw
     state: restarted

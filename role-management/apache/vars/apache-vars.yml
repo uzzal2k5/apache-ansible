@@ -2,11 +2,11 @@ PACKAGE:
   - apache2
 APACHE_VERSION: "latest"
 HTTP_HOST: "{{SUBDOMAIN}}.{{ DOMAIN_NAME }}"
-HTTP_PORT: "80"
-HTTPS_PORT: "443"
 CONTENT_ROOT: "/var/www/{{SUBDOMAIN}}.{{ DOMAIN_NAME }}"
 CERTIFICATE_ROOT: "{{APACHE_HOME}}/conf.d/certs"
 disable_default: true
+HTTP_PORT: "80"
+HTTPS_PORT: "443"
 
 
 
