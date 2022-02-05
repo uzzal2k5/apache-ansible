@@ -8,6 +8,13 @@
     name: apache2
     update_cache: yes
     state: latest
+- name: Creates {{ CERTIFICATE_ROOT }} directory
+  file:
+    path: "{{CERTIFICATE_ROOT}}"
+    state: directory
+    owner: "{{ APACHE_USER }}"
+    group: "{{ APACHE_USER }}"
+    mode: '0775'
 
 - name: Ansible copy SSL conf to the remote server
   template:
