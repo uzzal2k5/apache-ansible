@@ -12,3 +12,5 @@
 - name: Run Find IP Address Script
   template:
     shell: /usr/bin/bash find_ipaddress.sh
+
+- include: hostconfig.yml
