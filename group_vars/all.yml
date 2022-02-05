@@ -1,5 +1,5 @@
 REMOTE_USER: "webuser"
-APACHE_USER:  "www-data"
+APACHE_USER:  "webuser"
 SUBDOMAIN: "web"
 DOMAIN_NAME: "apachewebserver.lab"
 HTTP_CONF: "{{SUBDOMAIN}}.{{ DOMAIN_NAME }}.conf"

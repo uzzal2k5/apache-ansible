@@ -17,4 +17,7 @@
 
     SSLEngine on
     Include conf.d/ssl.conf
+    <Directory {{ CONTENT_ROOT }}>
+    Options -Indexes +FollowSymLinks AllowOverride All
+    </Directory>
 </VirtualHost>
