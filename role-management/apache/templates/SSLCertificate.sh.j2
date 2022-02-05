@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -ex
-[[ ! -z "{{SUBDOMAIN}}" ]] && DOMAIN="{{SUBDOMAIN}}.{{DOMAIN_NAME}}" || DOMAIN="{{DOMAIN_NAME}}"
+DOMAIN="{{SUBDOMAIN}}.{{DOMAIN_NAME}}"
 openssl genrsa -aes256 -passout pass:gsahdg -out ${DOMAIN}.pass.key 4096
 openssl rsa -passin pass:gsahdg -in ${DOMAIN}.pass.key -out ${DOMAIN}.key
 rm ${DOMAIN}.pass.key
