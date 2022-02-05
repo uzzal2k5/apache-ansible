@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 set -ex
-[[ ! -z "{{SUBDOMAIN}}" ]] && DOMAIN={{SUBDOMAIN}}.{{DOMAIN_NAME}} || DOMAIN={{DOMAIN_NAME}}
+[[ ! -z "{{SUBDOMAIN}}" ]] && DOMAIN="{{SUBDOMAIN}}.{{DOMAIN_NAME}}" || DOMAIN="{{DOMAIN_NAME}}"
 openssl genrsa -aes256 -passout pass:gsahdg -out ${DOMAIN}.pass.key 4096
 openssl rsa -passin pass:gsahdg -in ${DOMAIN}.pass.key -out ${DOMAIN}.key
 rm ${DOMAIN}.pass.key
 openssl req -nodes -newkey rsa:4096 -keyout ${DOMAIN}.key -out ${DOMAIN}.csr -subj "/C=BD/ST=BD/L=BD/O=Kube Cluster /OU=DevOps/CN=${DOMAIN}"
 openssl x509 -req -sha256 -days 365 -in ${DOMAIN}.csr -signkey ${DOMAIN}.key -out ${DOMAIN}.crt
-
-sudo su -s /bin/bash {{APACHE_USER}} -c "mv ${DOMAIN}.crt {{CERTIFICATE_ROOT}}/"
-sudo su -s /bin/bash {{APACHE_USER}} -c  "mv ${DOMAIN}.key {{CERTIFICATE_ROOT}}/"
+sudo mv ${DOMAIN}.crt {{CERTIFICATE_ROOT}}/
+sudo mv ${DOMAIN}.key {{CERTIFICATE_ROOT}}/
+sudo chown {{APACHE_USER}}:{{APACHE_USER}} -R {{CERTIFICATE_ROOT}}
+sudo chmod  644 -R {{CERTIFICATE_ROOT}}/
 rm -rf ${DOMAIN}.csr
