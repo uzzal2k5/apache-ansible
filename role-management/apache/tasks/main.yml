@@ -53,13 +53,10 @@
   when: disable_default
   notify: Reload Apache
 
-
 - name: Enable New VirtualHost {{ SUBDOMAIN}}.{{ DOMAIN_NAME }}.conf
   shell: /usr/sbin/a2ensite {{ SUBDOMAIN}}.{{ DOMAIN_NAME }}.conf
-  when:  Apache_Result|success
   notify:
     - Reload Apache
-
 
 - include: ufw.yml
 
