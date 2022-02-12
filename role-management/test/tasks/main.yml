@@ -41,7 +41,7 @@
 #     validate_certs: no
 #   delegate_to: 127.0.0.1
 - name: cunnect HTTPS
-  shell: echo quit | openssl s_client -servername {{ SUBDOMAIN }}.{{ DOMAIN_NAME }} -connect {{ SUBDOMAIN }}.{{ DOMAIN_NAME }}:443 | head
+  shell: echo quit | openssl s_client -servername {{ SUBDOMAIN }}.{{ DOMAIN_NAME }} -connect {{ SUBDOMAIN }}.{{ DOMAIN_NAME }}:443 | head > {{COMMON_DIR}}/current.log 2>&1
 
 - name: "Check Working HTTP Request"
   ansible.builtin.uri:
