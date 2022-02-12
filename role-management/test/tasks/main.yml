@@ -44,10 +44,7 @@
   shell: echo quit | openssl s_client -servername {{ SUBDOMAIN }}.{{ DOMAIN_NAME }} -connect {{ SUBDOMAIN }}.{{ DOMAIN_NAME }}:443 | head > {{COMMON_DIR}}/Checking_Certificates.log 2>&1
 
 - name: "Check Working HTTP Request"
-  ansible.builtin.uri:
-    shell: "curl -k https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }} > {{COMMON_DIR}}/Checking_{{ HTTPS_PORT}}.log 2>&1"
-    validate_certs: no
-  delegate_to: "localhost"
+  shell: "curl -k https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }} > {{COMMON_DIR}}/Checking_{{ HTTPS_PORT}}.log 2>&1"
   
 - name: "Check Working HTTP Request"
   ansible.builtin.uri:
