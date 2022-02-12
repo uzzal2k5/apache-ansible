@@ -40,6 +40,8 @@
 #     url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
 #     validate_certs: no
 #   delegate_to: 127.0.0.1
+- name: cunnect HTTPS
+  command: echo quit | openssl s_client -servername sh.rustup.rs -connect sh.rustup.rs:443 | head
 
 - name: "Check Working HTTP Request"
   ansible.builtin.uri:
