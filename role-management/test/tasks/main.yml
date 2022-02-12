@@ -40,18 +40,18 @@
 #     url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
 #     validate_certs: no
 #   delegate_to: 127.0.0.1
-- name: cunnect HTTPS
-  shell: echo quit | openssl s_client -servername {{ SUBDOMAIN }}.{{ DOMAIN_NAME }} -connect {{ SUBDOMAIN }}.{{ DOMAIN_NAME }}:443 | head >> {{COMMON_DIR}}/current.log 2>&1
+- name: Checking Certificates
+  shell: echo quit | openssl s_client -servername {{ SUBDOMAIN }}.{{ DOMAIN_NAME }} -connect {{ SUBDOMAIN }}.{{ DOMAIN_NAME }}:443 | head > {{COMMON_DIR}}/Checking_Certificates.log 2>&1
 
 - name: "Check Working HTTP Request"
   ansible.builtin.uri:
-    url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
+    url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }} > {{COMMON_DIR}}/Checking_{{ HTTP_PORT}}.log 2>&1"
     validate_certs: no
   delegate_to: "localhost"
 
 - name: "Check Working Content"
   ansible.builtin.uri:
-    url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
+    url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}> {{COMMON_DIR}}/Checking_{{ HTTPS_PORT}}.log 2>&1"
     return_content: true
     validate_certs: no
   delegate_to: "localhost"
