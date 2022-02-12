@@ -2,20 +2,20 @@
   command:
     cmd: /usr/local/sbin/start_maintenance.sh
 
-  - name: Confirm that 503 Unavailable response is returned
-    uri:
-      url: "http://{{ ansible_host }}/api/v1/healthcheck"
-      status_code: 503
+- name: Confirm that 503 Unavailable response is returned
+  uri:
+    url: "http://{{ ansible_host }}/api/v1/healthcheck"
+    status_code: 503
 
-  - name: Update application
-    command:
-      cmd: /usr/local/sbin/update_app.sh
+- name: Update application
+  command:
+    cmd: /usr/local/sbin/update_app.sh
 
-  - name: Run maintenance end script
-    command:
-      cmd: /usr/local/sbin/end_maintenance.sh
+- name: Run maintenance end script
+  command:
+    cmd: /usr/local/sbin/end_maintenance.sh
 
-  - name: Confirm that 200 OK response is returned
-    uri:
-      url: "http://{{ ansible_host }}/api/v1/healthcheck"
-      status_code: 200
+- name: Confirm that 200 OK response is returned
+  uri:
+    url: "http://{{ ansible_host }}/api/v1/healthcheck"
+    status_code: 200
