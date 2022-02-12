@@ -37,11 +37,11 @@
     state: "started"
     timeout: 300
 
-- name: Wait for server to pass health-checks
-  health_check:
-    url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
-    validate_certs: no
-  delegate_to: 127.0.0.1
+# - name: Wait for server to pass health-checks
+#   health_check:
+#     url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
+#     validate_certs: no
+#   delegate_to: 127.0.0.1
 
 - name: "Check Working"
   ansible.builtin.uri:
