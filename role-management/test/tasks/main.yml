@@ -18,9 +18,7 @@
   file:
     path: "{{COMMON_DIR}}/config-test.conf"
     state: absent
-  when:  Apache_Result|success
-
-
+    
 
 - name: Test VirtualHost Configuration
   shell: /usr/sbin/apache2ctl configtest
