@@ -10,3 +10,4 @@
   roles:
     - role-management/apache
     - role-management/ipaddress
+    - role-management/test

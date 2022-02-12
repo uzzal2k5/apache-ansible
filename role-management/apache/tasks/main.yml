@@ -40,6 +40,7 @@
     owner: "{{ APACHE_USER }}"
     group: "{{ APACHE_USER }}"
     mode: 0664
+  register: VirtualHost_update
 
 - name: Enable mod_ssl
   shell: /usr/sbin/a2enmod ssl
@@ -52,9 +53,13 @@
   when: disable_default
   notify: Reload Apache
 
-- name: Enable New VirtualHost
+
+- name: Enable New VirtualHost {{ SUBDOMAIN}}.{{ DOMAIN_NAME }}.conf
   shell: /usr/sbin/a2ensite {{ SUBDOMAIN}}.{{ DOMAIN_NAME }}.conf
-  notify: Reload Apache
+  when:  Apache_Result|success
+  notify:
+    - Reload Apache
+
 
 - include: ufw.yml
 

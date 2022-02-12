@@ -1,1 +1,5 @@
-URL: "https://{{ DOMAIN_NAME }}"
+URL: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
+apache_vhost_available: /etc/apache2/sites-available
+vhost_name: your site vhost name (e.g. my.example.site)
+apache_conf_available: /etc/apache2/conf_enabled
+apache_mods_enabled: /etc/apache2/mods_enabled

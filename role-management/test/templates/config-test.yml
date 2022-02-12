@@ -1,0 +1,7 @@
+#{{ ansible_managed }}
+# A temp config file to test Apache configuration
+ErrorLog /var/log/apache2/error_log
+Include {{ apache_conf_enabled }}
+Include {{ apache_mods_enabled }}/*.conf
+Include {{ apache_mods_enabled }}/*.load
+Include {{ apache_conf_to_test }}
