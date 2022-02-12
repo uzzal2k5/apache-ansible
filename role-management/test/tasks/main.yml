@@ -61,15 +61,15 @@
   ansible.builtin.assert:
     that: "'My cool WebPage' is in r_working.content"
 
-- name: Healthcheck | Wait for substitution application to be healthy
-  uri:
-    url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
-    method: GET
-    status_code: 200
-    validate_certs: no
-  register: result
-  untill: result.status == 200
-  retries: "10"
-  delay: "4"
-  when: substitution_healthcheck_url is defined
+# - name: Healthcheck | Wait for substitution application to be healthy
+#   uri:
+#     url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
+#     method: GET
+#     status_code: 200
+#     validate_certs: no
+#   register: result
+#   untill: result.status == 200
+#   retries: "10"
+#   delay: "4"
+#   when: substitution_healthcheck_url is defined
 - include: endpoint.yml
