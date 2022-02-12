@@ -4,11 +4,11 @@ MATCH_HOST="$(grep -n "^[^#]*${HOST_NAME}" /etc/hosts | cut -f1 -d:)"
 HOST_ENTRY="${IPADDRESS}  ${HOST_NAME}"
 if [ ! -z "$MATCH_HOST" ]
 then
-   while read -r line_number
+   echo $MATCH_HOST | while read line;
    do
-      sudo sed -i '' "${line_number}s/.*/${HOST_ENTRY} /" /etc/hosts
-   done < "$MATCH_HOST"
+      echo ${line}
+      sudo sed -i "${line}s/*/${HOST_ENTRY}/" /etc/hosts
+   done
 else
-    echo "$HOST_ENTRY"
     echo "$HOST_ENTRY" | sudo tee -a /etc/hosts > /dev/null
 fi
