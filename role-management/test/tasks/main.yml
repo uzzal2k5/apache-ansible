@@ -47,13 +47,13 @@
   shell: "curl -k https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }} > {{COMMON_DIR}}/Checking_{{ HTTPS_PORT}}.log 2>&1"
   
 - name: "Check Working HTTP Request"
-  ansible.builtin.uri:
+  uri:
     url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }} > {{COMMON_DIR}}/Checking_{{ HTTP_PORT}}.log 2>&1"
     validate_certs: no
   delegate_to: "localhost"
 
 - name: "Check Working Content"
-  ansible.builtin.uri:
+  uri:
     url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}> {{COMMON_DIR}}/Checking_{{ HTTPS_PORT}}.log 2>&1"
     return_content: true
     validate_certs: no
