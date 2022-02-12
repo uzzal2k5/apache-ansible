@@ -26,10 +26,10 @@
   shell: /usr/sbin/apache2ctl configtest
 
 - name: "Check Listening"
-    ansible.builtin.wait_for:
-      port: 80
-      state: "started"
-      timeout: 300
+  ansible.builtin.wait_for:
+    port: 80
+    state: "started"
+    timeout: 300
 
 - name: "Check Listening"
     ansible.builtin.wait_for:
