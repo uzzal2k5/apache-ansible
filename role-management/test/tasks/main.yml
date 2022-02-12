@@ -49,14 +49,16 @@
 - name: "Check Working HTTP Request"
   uri:
     url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }} > {{COMMON_DIR}}/Checking_{{ HTTP_PORT}}.log 2>&1"
-    validate_certs: no
+    status_code: 200
+    validate_certs: false
   delegate_to: "localhost"
 
 - name: "Check Working Content"
   uri:
     url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}> {{COMMON_DIR}}/Checking_{{ HTTPS_PORT}}.log 2>&1"
     return_content: true
-    validate_certs: no
+    status_code: 200
+    validate_certs: false
   delegate_to: "localhost"
   register: "r_working"
 
