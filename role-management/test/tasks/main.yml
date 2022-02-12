@@ -32,10 +32,10 @@
     timeout: 300
 
 - name: "Check Listening"
-    ansible.builtin.wait_for:
-      port: 443
-      state: "started"
-      timeout: 300
+  ansible.builtin.wait_for:
+    port: 443
+    state: "started"
+    timeout: 300
 
 - name: Wait for server to pass health-checks
   health_check:
@@ -50,16 +50,16 @@
     delegate_to: "localhost"
 
 - name: "Check Working"
-    ansible.builtin.uri:
-      url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
-      return_content: true
-      validate_certs: no
-    delegate_to: "localhost"
-    register: "r_working"
+  ansible.builtin.uri:
+    url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
+    return_content: true
+    validate_certs: no
+  delegate_to: "localhost"
+  register: "r_working"
 
 - name: "Check Content"
-    ansible.builtin.assert:
-      that: "'My cool WebPage' is in r_working.content"
+  ansible.builtin.assert:
+    that: "'My cool WebPage' is in r_working.content"
 
 - name: Healthcheck | Wait for substitution application to be healthy
   uri:
