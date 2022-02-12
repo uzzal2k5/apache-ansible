@@ -23,15 +23,15 @@
 - name: Test VirtualHost Configuration
   shell: /usr/sbin/apache2ctl configtest
 
-- name: "Check Listening"
+- name: "Check Listening {{ HTTP_PORT }}"
   ansible.builtin.wait_for:
-    port: 80
+    port: "{{ HTTP_PORT }}"
     state: "started"
     timeout: 300
 
-- name: "Check Listening"
+- name: "Check Listening {{ HTTPS_PORT }}"
   ansible.builtin.wait_for:
-    port: 443
+    port: "{{ HTTPS_PORT }}"
     state: "started"
     timeout: 300
 
@@ -41,13 +41,13 @@
 #     validate_certs: no
 #   delegate_to: 127.0.0.1
 
-- name: "Check Working"
+- name: "Check Working HTTP Request"
   ansible.builtin.uri:
     url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
     validate_certs: no
   delegate_to: "localhost"
 
-- name: "Check Working"
+- name: "Check Working Content"
   ansible.builtin.uri:
     url: "https://{{ SUBDOMAIN }}.{{ DOMAIN_NAME }}"
     return_content: true
